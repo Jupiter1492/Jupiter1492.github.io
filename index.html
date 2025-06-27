@@ -261,14 +261,28 @@
   </header>
 
   <nav>
+    <button onclick="showSection('home')">Home</button>
+    <button onclick="showSection('mission')">Our Mission</button>
     <button onclick="showSection('contact')">Contact</button>
     <button onclick="showSection('about')">About</button>
     <button class="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
   </nav>
 
   <main>
+    <!-- Home Section -->
+    <div id="home" class="container">
+      <h2>Welcome to Elements of Truth</h2>
+      <p>This is your central hub to explore spiritual opportunities and stay connected with our student community. Whether you’re seeking credit, community, or clarity—we’re glad you’re here.</p>
+    </div>
+
+    <!-- Mission Section -->
+    <div id="mission" class="container hidden">
+      <h2>Our Mission</h2>
+      <p>Elements of Truth exists to empower SEU students with spiritual formation credit through engaging meetings and meaningful connection. We provide opportunities to grow in faith, form lasting relationships, and fulfill your chapel credit in a more intentional way.</p>
+    </div>
+
     <!-- Contact Section -->
-    <div id="contact" class="container">
+    <div id="contact" class="container hidden">
       <h2>Contact Us</h2>
       <p>Reach out with any questions, concerns, or partnership opportunities. We're here to help SEU students succeed through Elements of Truth.</p>
 
@@ -349,8 +363,10 @@
     }
 
     function showSection(section) {
-      document.getElementById('contact').classList.add('hidden');
-      document.getElementById('about').classList.add('hidden');
+      const sections = ['home', 'mission', 'contact', 'about'];
+      sections.forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+      });
       document.getElementById(section).classList.remove('hidden');
     }
 
