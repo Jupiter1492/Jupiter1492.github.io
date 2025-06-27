@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Elements of Truth | Contact & About</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #121212;
+      --text: #eaeaea;
+      --card: #1e1e1e;
+      --input-bg: #2c2c2c;
+      --yellow: #FFD54F;
+      --yellow-dark: #fbc02d;
+      --primary: #007acc;
+      --primary-dark: #005f99;
+      --hover: #004f80;
+      --footer-bg: #181818;
+      --heading-font: 'Poppins', sans-serif;
+      --body-font: 'Inter', sans-serif;
+    }
+
+    body.light {
+      --bg: #f4f4f4;
+      --text: #212121;
+      --card: #ffffff;
+      --input-bg: #ffffff;
+      --footer-bg: #333333;
+    }
+
+    * {
+      box-sizing: border-box;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--body-font);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(to right, var(--primary), var(--yellow));
+      color: #fff;
+      padding: 2.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    header h1 {
+      font-family: var(--heading-font);
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-weight: 300;
+      font-size: 1.1rem;
+    }
+
+    nav {
+      background-color: var(--card);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #444;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      font-family: var(--heading-font);
+      font-weight: 600;
+      color: var(--yellow);
+      text-decoration: none;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    nav button:hover {
+      background-color: var(--yellow-dark);
+      color: #000;
+    }
+
+    .toggle-theme {
+      border: 2px solid var(--yellow);
+      color: var(--yellow);
+    }
+
+    .toggle-theme:hover {
+      background-color: var(--yellow);
+      color: #000;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      font-family: var(--heading-font);
+      color: var(--yellow);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    form label {
+      font-weight: 600;
+      display: block;
+      margin-top: 1rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      background-color: var(--input-bg);
+      color: var(--text);
+      border: 1px solid #777;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button[type="submit"] {
+      margin-top: 1.5rem;
+      background-color: var(--yellow);
+      color: #000;
+      font-weight: bold;
+      padding: 0.9rem 1.4rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: var(--heading-font);
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: var(--yellow-dark);
+      transform: scale(1.02);
+    }
+
+    footer {
+      background-color: var(--footer-bg);
+      color: #ccc;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .about-content {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .about-text {
+      flex: 1 1 300px;
+    }
+
+    .about-image {
+      flex: 1 1 250px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .about-image img {
+      width: 100%;
+      border-radius: 10px;
+      opacity: 0.95;
+      mix-blend-mode: screen;
+    }
+
+    body.light .about-image img {
+      mix-blend-mode: multiply;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .modal {
+      background-color: var(--card);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      max-width: 400px;
+      text-align: center;
+      color: var(--text);
+    }
+
+    .modal h3 {
+      font-family: var(--heading-font);
+      color: var(--yellow);
+      margin-bottom: 1rem;
+    }
+
+    .modal button {
+      margin-top: 1rem;
+      background-color: var(--yellow);
+      color: #000;
+      font-weight: bold;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 700px) {
+      .about-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Elements of Truth</h1>
+    <p>Empowering SEU Students with Chapel Credit Opportunities</p>
+  </header>
+
+  <nav>
+    <button onclick="showSection('contact')">Contact</button>
+    <button onclick="showSection('about')">About</button>
+    <button class="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+  </nav>
+
+  <main>
+    <!-- Contact Section -->
+    <div id="contact" class="container">
+      <h2>Contact Us</h2>
+      <p>Reach out with any questions, concerns, or partnership opportunities. We're here to help SEU students succeed through Elements of Truth.</p>
+
+      <form id="contact-form" action="https://formspree.io/f/xeokppyw" method="POST">
+        <label for="name">Your Name</label>
+        <input type="text" name="name" id="name" placeholder="Enter your name" required>
+
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="Enter your email" required>
+
+        <label for="message">Message</label>
+        <textarea name="message" id="message" rows="5" placeholder="Your message here..." required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" class="container hidden">
+      <div class="about-content">
+        <div class="about-text">
+          <h2>About Us</h2>
+          <p><strong>Elements of Truth</strong> is dedicated to making the chapel credit process more impactful, spiritual, and student-centered. Through meaningful engagement, we help students grow in faith and service.</p>
+          <p>We believe that spiritual formation is a cornerstone of college life. Whether you're attending chapel, joining a ministry, or engaging in service, we want to walk with you on your faith journey.</p>
+          <p>Thanks for letting us support your SEU story. Let’s walk in truth—together.</p>
+        </div>
+        <div class="about-image">
+          <img src="Phillip.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Elements of Truth. All rights reserved.</p>
+  </footer>
+
+  <!-- Modal Popup -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <h3>🎉 Message Sent!</h3>
+      <p>Thank you for reaching out to Elements of Truth. We'll be in touch soon.</p>
+      <button onclick="closeModal()">Okay</button>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    const modal = document.getElementById('modal');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = new FormData(form);
+
+      fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          form.reset();
+          modal.style.display = 'flex';
+        } else {
+          alert('There was a problem sending your message. Please try again later.');
+        }
+      }).catch(error => {
+        alert('Error: ' + error.message);
+      });
+    });
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    }
+
+    function showSection(section) {
+      document.getElementById('contact').classList.add('hidden');
+      document.getElementById('about').classList.add('hidden');
+      document.getElementById(section).classList.remove('hidden');
+    }
+
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light');
+      }
+    })();
+  </script>
+
+</body>
+</html>
